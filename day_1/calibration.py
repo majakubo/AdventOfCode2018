@@ -3,10 +3,8 @@ from itertools import cycle
 
 def calculate_frequency(input):
     parameters = parse_file(input)
-    frequency = 0
-    for parameter in parameters:
-        frequency += parameter
-    return frequency
+    return sum(parameters)
+
 
 
 def parse_file(input):
