@@ -1,5 +1,5 @@
 from collections import Counter
-import nltk
+from nltk import edit_distance
 
 
 def checksum(id_list):
@@ -29,7 +29,7 @@ def parse_file(id_list):
 def get_correct_id(id_list):
     for word_one in id_list:
         for word_two in id_list:
-            if nltk.edit_distance(word_one, word_two) == 1:
+            if edit_distance(word_one, word_two) == 1:
                 words = list(zip(word_one, word_two))
                 id = [letter_one for letter_one, letter_two in words if letter_one == letter_two] #
                 return ''.join(id)
