@@ -20,15 +20,15 @@ def checksum(id_list):
     return doubles * triples
 
 
-def parse_file(input):
-    parameters = list(input)
+def parse_file(id_list):
+    parameters = list(id_list)
     parameters = [parameter[:-1] for parameter in parameters]
     return parameters
 
 
-def get_correct_id(input):
-    for word_one in input:
-        for word_two in input:
+def get_correct_id(id_list):
+    for word_one in id_list:
+        for word_two in id_list:
             if nltk.edit_distance(word_one, word_two) == 1:
                 words = list(zip(word_one, word_two))
                 id = [letter_one for letter_one, letter_two in words if letter_one == letter_two] #
