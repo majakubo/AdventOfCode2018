@@ -1,5 +1,4 @@
 from collections import Counter
-from nltk import edit_distance
 
 
 def checksum(id_list):
@@ -25,11 +24,19 @@ def parse_file(id_list):
     parameters = [parameter[:-1] for parameter in parameters]
     return parameters
 
+def differs(seq_one, seq_two):
+    sequences = list(zip(seq_one, seq_two))
+    diff = 0
+    for l1, l2 in sequences:
+        if l1 != l2:
+            diff += 1
+
+    return diff
 
 def get_correct_id(id_list):
     for word_one in id_list:
         for word_two in id_list:
-            if edit_distance(word_one, word_two) == 1:
+            if differs(word_one, word_two) == 1:
                 words = list(zip(word_one, word_two))
                 id = [letter_one for letter_one, letter_two in words if letter_one == letter_two] #
                 return ''.join(id)
