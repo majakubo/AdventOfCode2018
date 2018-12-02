@@ -6,9 +6,7 @@ def checksum(id_list):
     doubles, triples = 0, 0
 
     for id in id_list:
-        id = list(id)
-        letter_frequency = dict(Counter(id))
-
+        letter_frequency = Counter(id)
         contains_double, contains_triple = False, False
 
         for letter in letter_frequency:
@@ -34,9 +32,9 @@ def get_correct_id(input):
             if nltk.edit_distance(word_one, word_two) == 1:
                 words = list(zip(word_one, word_two))
                 id = [letter_one for letter_one, letter_two in words if letter_one == letter_two] #
-                print(''.join(id))
+                return ''.join(id)
 
 
 if __name__ == '__main__':
     print(checksum(parse_file(open('1input.txt', 'r'))))
-    get_correct_id(parse_file(open('1input.txt', 'r')))
+    print(get_correct_id(parse_file(open('1input.txt', 'r'))))
