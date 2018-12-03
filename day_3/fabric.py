@@ -18,6 +18,7 @@ class Rectangle:
             for j in range(self.width):
                 if fabric[self.top + i][self.left + j] != self.id:
                     return False
+
         return True
 
     def draw_yourself(self, fabric):
@@ -78,6 +79,8 @@ if __name__ == '__main__':
     rectangles = create_rectangles(claims)
     fabric = draw_rectangles(rectangles)
     print(count_collisions(fabric))
+
     value_rectangles = find_valid_rectangle(rectangles, fabric)
     for rectangle in value_rectangles:
         print(rectangle)
+
