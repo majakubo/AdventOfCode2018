@@ -1,9 +1,3 @@
-def get_input(file):
-    parameters = list(file)
-    parameters = [parameter[:-1] for parameter in parameters]
-    return parameters
-
-
 class Rectangle:
     def __init__(self, _id):
         self.id = _id
@@ -17,7 +11,6 @@ class Rectangle:
 
         # convert every element to int
         parameters = tuple(map(lambda x: int(x), parameters))
-        print(parameters)
         self.left, self.top, self.width, self.height = parameters
 
     def check_interruption(self, fabric):
@@ -36,15 +29,22 @@ class Rectangle:
                     fabric[self.top + i][self.left + j] = 'x'
 
 
+def get_input(file):
+    parameters = list(file)
+    parameters = [parameter[:-1] for parameter in parameters]
+    return parameters
+
+
 def create_rectangles(claims):
     rectangles = []
     for claim in claims:
-        rectangles.append(Rectangle(claim))
+        rectangle = Rectangle(claim)
+        rectangles.append(rectangle)
 
     return rectangles
 
 
-def draw_squares(rectangles):
+def draw_rectangles(rectangles):
     size = 1000
     fabric = [[0 for i in range(size)] for j in range(size)]
 
@@ -58,13 +58,13 @@ def count_collisions(fabric):
     counter = 0
     for i in range(len(fabric)):
         for j in range(len(fabric)):
-            if fabric[i][j] > 1:
+            if fabric[i][j] == 'x':
                 counter += 1
 
     return counter
 
 
-def find_valid_square(rectangles, fabric):
+def find_valid_rectangle(rectangles, fabric):
     ids = []
     for rectangle in rectangles:
         if rectangle.check_interruption(fabric):
@@ -76,7 +76,8 @@ def find_valid_square(rectangles, fabric):
 if __name__ == '__main__':
     claims = get_input(open('1input.txt'))
     rectangles = create_rectangles(claims)
-    fabric = draw_squares(rectangles)
-    value_rectangles = find_valid_square(rectangles, fabric)
+    fabric = draw_rectangles(rectangles)
+    print(count_collisions(fabric))
+    value_rectangles = find_valid_rectangle(rectangles, fabric)
     for rectangle in value_rectangles:
         print(rectangle)
